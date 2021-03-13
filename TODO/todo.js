@@ -11,8 +11,8 @@ class TodoList{
         const html = `
         <li class="li">
             ${text}
-            <button class="checked">V</button>
-            <button class="close">X</button>
+            <button class="checked">✔</button>
+            <button class="close">✘</button>
         </li>
         `
         list.innerHTML += html;
