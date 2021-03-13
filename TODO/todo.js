@@ -1,4 +1,4 @@
-const list = document.getElementById("todo-list");
+const list = document.querySelector(".task")
 const addTask = document.querySelector(".addTask");
 const input = document.getElementById("input");
 
@@ -16,6 +16,10 @@ class TodoList{
         </li>
         `
         list.innerHTML += html;
+        const child = this.todoList.children;
+        for (let i = 0; i < child.length; i++) {
+                child[i].style.display = "block";
+        }
     } 
     
     removeTodo(e) {
@@ -27,6 +31,17 @@ class TodoList{
             e.target.parentElement.classList.toggle("check");
         }    
     }
+    searchTodo(value) {
+        const child = this.todoList.children;
+        for (let i = 0; i < child.length; i++) {
+            const textCt = child[i].textContent;
+            if(textCt.toUpperCase().indexOf(value.toUpperCase()) > -1) {
+                child[i].style.display = "block";
+            }else{
+                child[i].style.display = "none";
+            }
+        }
+    }
 }
 
 const todo = new TodoList(list);
@@ -37,11 +52,15 @@ addTask.addEventListener("click", function(){
     }
     else{
         todo.addTodo(input.value);
-        input.value = "";
+input.value ="";
     }
     
 })
 
 list.addEventListener("click", function(e){
     todo.removeTodo(e);
+})
+
+input.addEventListener("input", function(){
+    todo.searchTodo(input.value);
 })
